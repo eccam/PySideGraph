@@ -1,0 +1,44 @@
+Python graph library using PySide 
+
+Features:
+- simplifies graph drawing
+- several node types (text, image)
+- several node connecion types
+- different decorators of node connection (e.g: arrow)
+- supports node draging with left mouse button
+- supports node rescaling with right mouse button
+
+Known issues:
+- wrong connection node rendering under 64b Ubuntu (however, 64b Win doesn't suffer this bug)
+
+Prerequisites:
+Python, PySide
+
+Example code showing simple graph:  
+import sys
+import os
+from PySide.QtCore import *
+from PySide.QtGui import *
+from PySideGraph import *
+
+#create simple QAppliation with desired scene canvas size
+app = QApplication(sys.argv)
+view = QGraphicsView()
+scene = QGraphicsScene()
+scene.setSceneRect(0,0,800,600)
+
+#Select node connection and its decorator types
+nc = CenterCalc()
+cd = LineArrowOnStart()          
+
+#make root node and add it to the scene
+root = ImageNode(nc, cd, None, "root", QImage("pc.png"), 400, 20, 100,100 )
+scene.addItem(root)
+
+#create graph nodes
+box.addChild( TextNode(nc, cd, root, "node", "Node" , 500, 340, 200, 30))  
+
+view.setScene(scene)
+view.show()
+
+sys.exit(app.exec_()) 
